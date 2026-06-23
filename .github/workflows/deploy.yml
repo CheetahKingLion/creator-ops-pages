@@ -1,0 +1,32 @@
+name: Deploy All Surge.sh Sites
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+env:
+  SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
+  SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm install -g surge
+      - run: surge --project ./ --domain free-unlie.surge.sh
+      - run: surge --project ./ --domain ugcstudio1.surge.sh
+      - run: surge --project ./ --domain creatorops-kit.surge.sh
+      - run: surge --project ./ --domain ugcpitch.surge.sh
+      - run: surge --project ./ --domain aivideobrief.surge.sh
+      - run: surge --project ./ --domain weddingops.surge.sh
+      - run: surge --project ./ --domain creatorops-hub.surge.sh
+      - run: surge --project ./ --domain brand-pitch-template.surge.sh
+      - run: surge --project ./ --domain freelance-ops-template.surge.sh
+      - run: surge --project ./ --domain video-client-brief.surge.sh
+      - run: surge --project ./ --domain wedding-client-kit.surge.sh
+      - run: surge --project ./ --domain creator-worksheet-free.surge.sh
